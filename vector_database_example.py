@@ -1,6 +1,5 @@
-# pip install chromadb openai requests pandas tiktoken
-
 import os
+import sys
 from typing import List
 
 import chromadb
@@ -13,7 +12,6 @@ EMBEDDING_MODEL = "text-embedding-3-small"
 COST_PER_MILLION_TOKENS = 2.50  # Check OpenAI pricing for the specific model
 CHROMA_DB_PATH = "./chroma_movies_db"
 COLLECTION_NAME = "movies_openai_embeddings"
-QUERY = "A mind-bending science fiction movie about space or dreams"
 N_RESULTS = 3
 
 # OpenAI client — set OPENAI_API_KEY in your environment variables
@@ -54,6 +52,12 @@ def print_results(results: dict) -> None:
 
 
 if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print('Usage: python vector_database_example.py "<search query>"')
+        sys.exit(1)
+
+    query = sys.argv[1]
+
     df = pd.read_csv("movies_dataset.csv")
     print(df.columns)
     print(df.shape)
@@ -81,7 +85,7 @@ if __name__ == "__main__":
     )
     print("Inserted movies into Chroma.")
 
-    query_embedding = get_embeddings([QUERY])[0]
+    query_embedding = get_embeddings([query])[0]
     results = collection.query(
         query_embeddings=[query_embedding], n_results=N_RESULTS)
     print_results(results)

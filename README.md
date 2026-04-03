@@ -45,7 +45,7 @@ export OPENAI_API_KEY="your_api_key_here"
 From the project root:
 
 ```bash
-python vector_database_example.py
+python vector_database_example.py "A mind-bending science fiction movie about space or dreams"
 ```
 
 ## Configuration
@@ -56,7 +56,6 @@ The main settings are defined near the top of `vector_database_example.py`:
 - `COST_PER_MILLION_TOKENS` - estimated embedding cost reference
 - `CHROMA_DB_PATH` - local folder where Chroma stores data
 - `COLLECTION_NAME` - collection name inside Chroma
-- `QUERY` - semantic search prompt
 - `N_RESULTS` - number of matches returned
 
 ## Output
@@ -78,10 +77,8 @@ When the script runs, it prints:
 
 ## Example Query
 
-The current default query is:
+Pass the query as a command-line argument:
 
-```text
-A mind-bending science fiction movie about space or dreams
+```bash
+python vector_database_example.py "A mind-bending science fiction movie about space or dreams"
 ```
-
-You can edit `QUERY` in `vector_database_example.py` to test different semantic searches.
