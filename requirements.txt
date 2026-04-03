@@ -1,0 +1,5 @@
+chromadb
+openai
+requests
+pandas
+tiktoken
